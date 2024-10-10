@@ -52,7 +52,6 @@ class VideoEditor():
         # usa o arquivo de áudio como fonte de áudio
         with sr.AudioFile(path) as source:
             audio_listened = self.recognizer.record(source)
-            # try converting it to text
             text = self.recognizer.recognize_google(audio_listened, language="pt-BR")
         return text
 
@@ -126,7 +125,7 @@ class VideoEditor():
                     else: # 100% do pedaço do áudio
                         data = {"Second_initial":((i-1) * 5) + 1, "Second_end":(i * 5), "Second_cut":((i-1) * 5) + 5}
                     break
-        # return the text for all chunks detected
+        # retorna os dados com as informações para o corte do vídeo
         return data
 
     def get_large_audio_transcription_fixed_interval(self, path: str, phrase: str, model: str = 'google'):
